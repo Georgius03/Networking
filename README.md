@@ -59,7 +59,7 @@ router bgp 65002
   network 20.20.20.0/27
   network 2.2.2.2/32
 
-# 5. Configuring OSPF for Dynamic Routing (20 points)
+# 5. Configuring OSPF for Dynamic Routing
    
 ## RTR-L
 router ospf
@@ -71,13 +71,13 @@ router ospf
   network 20.20.20.0/27 area 0
   network 30.30.30.0/30 area 0
 
-# 6. Enabling Telnet Connectivity between PC1 and PC3 (10 points)
+# 6. Enabling Telnet Connectivity between PC
    
-## PC1 (Setting up the Telnet server)
+## PCn (Setting up the Telnet server)
 sudo systemctl enable xinetd
 sudo systemctl start xinetd
 sudo useradd -m usertelnet
 echo "usertelnet:P@ssw0rdTelnet" | sudo chpasswd
 
-## Connecting from PC3
+## Connecting from PCm
 telnet PC1
