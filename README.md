@@ -1,7 +1,6 @@
 # Networking
-Solution for the Networking Task
 
-1. Configuring IP Addressing
+# 1. Configuring IP Addressing
    
 a) Assigning addresses for RTR-L:
 Network: 10.10.10.0/27
@@ -26,58 +25,59 @@ d) Assigning addresses between routers:
 RTR-L: 30.30.30.1/30
 RTR-R: 30.30.30.2/30
 
-2. Configuring Loopback Interfaces
-# RTR-L
+# 2. Configuring Loopback Interfaces
+
+## RTR-L
 ip address add 1.1.1.1/32 dev lo
 
-# RTR-R
+## RTR-R
 ip address add 2.2.2.2/32 dev lo
 
 
 3. Configuring VLANs in Open vSwitch
-# SW1
+## SW1
 ovs-vsctl add-br br0
 ovs-vsctl add-port br0 ens20 tag=10
 ovs-vsctl add-port br0 ens21 tag=20
 
-# SW2
+## SW2
 ovs-vsctl add-br br0
 ovs-vsctl add-port br0 ens20 tag=10
 ovs-vsctl add-port br0 ens21 tag=20
 
-4. Configuring BGP between Routers
+# 4. Configuring BGP between Routers
 
-# RTR-L (AS 65001)
+## RTR-L (AS 65001)
 router bgp 65001
   neighbor 30.30.30.2 remote-as 65002
   network 10.10.10.0/27
   network 1.1.1.1/32
 
-# RTR-R (AS 65002)
+## RTR-R (AS 65002)
 router bgp 65002
   neighbor 30.30.30.1 remote-as 65001
   network 20.20.20.0/27
   network 2.2.2.2/32
 
-5. Configuring OSPF for Dynamic Routing (20 points)
+# 5. Configuring OSPF for Dynamic Routing (20 points)
    
-# RTR-L
+## RTR-L
 router ospf
   network 10.10.10.0/27 area 0
   network 30.30.30.0/30 area 0
 
-# RTR-R
+## RTR-R
 router ospf
   network 20.20.20.0/27 area 0
   network 30.30.30.0/30 area 0
 
-6. Enabling Telnet Connectivity between PC1 and PC3 (10 points)
+# 6. Enabling Telnet Connectivity between PC1 and PC3 (10 points)
    
-# PC1 (Setting up the Telnet server)
+## PC1 (Setting up the Telnet server)
 sudo systemctl enable xinetd
 sudo systemctl start xinetd
 sudo useradd -m usertelnet
 echo "usertelnet:P@ssw0rdTelnet" | sudo chpasswd
 
-# Connecting from PC3
+## Connecting from PC3
 telnet PC1
